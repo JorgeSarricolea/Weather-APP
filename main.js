@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    let result = $("#result");
+    let information = $("#information");
     let API_KEY = "33c9af543c6207cff3bfc0fdedc318b3";
     let url = "https://api.openweathermap.org/data/2.5/weather?q=";
     let emptyInput = "Input field cannot be empty";
@@ -37,7 +37,7 @@ $(document).ready(function() {
                         let name = details.name;
                         let weather = details.weather[0].main;
                         let description = details.weather[0].description;
-                        let temperatureC = details.main.temp;
+                        let temperatureC = (details.main.temp).toFixed(0);
                         let humidity = details.main.humidity;
                         let windSpeed = (details.wind.speed*3.6).toFixed(2);
 
@@ -49,16 +49,57 @@ $(document).ready(function() {
                         console.log(details.main.humidity);
                         console.log(windSpeed);
 
+                        /* Switch Weather Icons
+                        ---------------------*/
+
+                        switch (details.weather[0].main) {
+                            case "Thunderstorm":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/11d@2x.png");
+                                break;
+
+                            case "Drizzle":
+                            case "Rain":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/09d@2x.png");
+                                break;
+
+                            case "Snow":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/13d@2x.png");
+                                break;
+
+                            case "Mist":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/50d@2x.png");
+                                break;
+
+                            case "Clear":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/01d@2x.png");
+                                break;
+
+                            case "Clouds":
+                                $(".weather-icon").attr("src", "https://openweathermap.org/img/wn/02d@2x.png");
+                                break;
+
+                            default:
+                                $(".weather-icon").attr("src", "");
+                        }
+
                         /* User City Search
                         ---------------------*/
 
-                        result.html(
+                        information.html(
                             `<div class="result">
                                 <h2>${name}</h2>
+                                <h3 class="temperature">${temperatureC}°C</h3>
                                 <h3>${weather} - ${description}</h3>
-                                <h3>${temperatureC}°C</h3>
-                                <h3>Humidity: ${humidity}%</h3>
-                                <h3>Wind speed: ${windSpeed} km/h</h3>
+                                <div class="weather-details">
+                                    <div class="container">
+                                        <i class="fa-solid fa-droplet">
+                                        </i><h3>Humidity: ${humidity}%</h3>
+                                    </div>
+                                    <div class="container">
+                                        <i class="fa-solid fa-wind"></i>
+                                        <h3>Wind speed: ${windSpeed} km/h</h3>
+                                    </div>
+                                </div>
                             </div>`
                         );
                     }
@@ -68,7 +109,7 @@ $(document).ready(function() {
                     /* API Invalid Input
                     ---------------------*/
 
-                    $("#details").hide();
+                    $("#result").hide();
                     $(".invalid-input").html(notFound);
                     $(".invalid-input").show();
                     setTimeout(function() {
