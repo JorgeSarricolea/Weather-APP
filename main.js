@@ -41,6 +41,7 @@ $(document).ready(function() {
                         let humidity = details.main.humidity;
                         let windSpeed = (details.wind.speed*3.6).toFixed(2);
 
+                        /*
                         console.log(details);
                         console.log(details.name);
                         console.log(details.weather[0].main);
@@ -48,6 +49,9 @@ $(document).ready(function() {
                         console.log(temperatureC);
                         console.log(details.main.humidity);
                         console.log(windSpeed);
+                        */
+
+                        console.log(details);
 
                         /* Switch Weather Icons
                         ---------------------*/
