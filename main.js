@@ -1,7 +1,8 @@
+import { API_KEY } from './api-key.js';
+
 $(document).ready(function() {
 
     let information = $("#information");
-    let API_KEY = "33c9af543c6207cff3bfc0fdedc318b3";
     let url = "https://api.openweathermap.org/data/2.5/weather?q=";
     let emptyInput = "Input field cannot be empty";
     let notFound = "Not city found:(";
