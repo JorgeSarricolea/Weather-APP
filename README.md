@@ -11,16 +11,18 @@ Note: Unlike the project with MealDB, where an API key was not necessary, for th
 
 Example:
 
+**let API_KEY = "your_api_key"**
+
 ```
 $(document).ready(function() {
 
-    let **API_KEY = "your_api_key"**
+    let API_KEY = "your_api_key"
     let information = $("#information");
     let url = "https://api.openweathermap.org/data/2.5/weather?q=";
     let emptyInput = "Input field cannot be empty";
     let notFound = "Not city found:(";
     
-   ... Rest of the code
+   // Rest of the code...
 });
 ```
 
