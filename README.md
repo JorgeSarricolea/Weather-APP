@@ -14,7 +14,7 @@ Example:
 ```
 $(document).ready(function() {
 
-    let API_KEY = "your_api_key"
+    _let API_KEY = "your_api_key"_
     let information = $("#information");
     let url = "https://api.openweathermap.org/data/2.5/weather?q=";
     let emptyInput = "Input field cannot be empty";
