@@ -1,31 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Get references to HTML elements
     const information = document.getElementById("information");
     const url = "https://api.openweathermap.org/data/2.5/weather?q=";
     const emptyInput = "Input field cannot be empty";
     const notFound = "Not city found:(";
     const API_KEY = "33c9af543c6207cff3bfc0fdedc318b3";
 
-    /* Search Button
-    ---------------------*/
-
+    // Search Button
     const searchBtn = document.querySelector(".search-btn");
     searchBtn.addEventListener("click", fetchData);
 
-    /* Enter key press
-    ---------------------*/
+    // Enter key press
     const searchInp = document.querySelector(".search-inp");
     searchInp.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            fetchData();
-        }
+        if (event.key === "Enter") fetchData();
     });
 
+    // Function to fetch weather data
     function fetchData() {
         const userInp = searchInp.value;
 
-        /* Error Message
-        ---------------------*/
-
+        // Error Message
         if (userInp.length === 0) {
             const emptyInputMessage = document.createElement("div");
             emptyInputMessage.textContent = emptyInput;
@@ -36,12 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 emptyInputMessage.style.display = "none";
                 information.removeChild(emptyInputMessage);
             }, 3000);
-
         } else {
-
-            /* API Fetch GET
-            ---------------------*/
-
             const xhr = new XMLHttpRequest();
             xhr.open("GET", url + userInp + "&units=metric&appid=" + API_KEY, true);
 
@@ -57,44 +47,36 @@ document.addEventListener("DOMContentLoaded", function () {
                     const humidity = details.main.humidity;
                     const windSpeed = (details.wind.speed * 3.6).toFixed(2);
 
-                    switch (details.weather[0].main) {
-                        case "Thunderstorm":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/11d@2x.png";
-                            break;
-                        case "Drizzle":
-                        case "Rain":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/09d@2x.png";
-                            break;
-                        case "Snow":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/13d@2x.png";
-                            break;
-                        case "Mist":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/50d@2x.png";
-                            break;
-                        case "Clear":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/01d@2x.png";
-                            break;
-                        case "Clouds":
-                            document.querySelector(".weather-icon").src = "https://openweathermap.org/img/wn/02d@2x.png";
-                            break;
-                        default:
-                            document.querySelector(".weather-icon").src = "";
-                    }
+                    // Define a hash table for weather icons
+                    const weatherIcons = {
+                        Thunderstorm: "https://openweathermap.org/img/wn/11d@2x.png",
+                        Drizzle: "https://openweathermap.org/img/wn/09d@2x.png",
+                        Rain: "https://openweathermap.org/img/wn/09d@2x.png",
+                        Snow: "https://openweathermap.org/img/wn/13d@2x.png",
+                        Mist: "https://openweathermap.org/img/wn/50d@2x.png",
+                        Clear: "https://openweathermap.org/img/wn/01d@2x.png",
+                        Clouds: "https://openweathermap.org/img/wn/02d@2x.png"
+                    };
 
-                    information.innerHTML = `
-                        <div class="result">
-                            <h2>${name}</h2>
-                            <h3 class="temperature">${temperatureC}°C</h3>
-                            <h3>${weather} - ${description}</h3>
-                            <div class="weather-details">
-                                <div class="container">
-                                    <i class="fa-solid fa-droplet"></i><h3>Humidity: ${humidity}%</h3>
-                                </div>
-                                <div class="container">
-                                    <i class="fa-solid fa-wind"></i><h3>Wind speed: ${windSpeed} km/h</h3>
-                                </div>
+                    // Get the appropriate weather icon URL from the hash table
+                    const weatherIconUrl = weatherIcons[weather] || "";
+
+                    document.querySelector(".weather-icon").src = weatherIconUrl;
+
+                    // Display weather information
+                    information.innerHTML = `<div class="result">
+                        <h2>${name}</h2>
+                        <h3 class="temperature">${temperatureC}°C</h3>
+                        <h3>${weather} - ${description}</h3>
+                        <div class="weather-details">
+                            <div class="container">
+                                <i class="fa-solid fa-droplet"></i><h3>Humidity: ${humidity}%</h3>
                             </div>
-                        </div>`;
+                            <div class="container">
+                                <i class="fa-solid fa-wind"></i><h3>Wind speed: ${windSpeed} km/h</h3>
+                            </div>
+                        </div>
+                    </div>`;
                 }
             };
 
