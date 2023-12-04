@@ -1,6 +1,6 @@
 # [Weather APP](https://wtrapp.netlify.app)
 
-¿Necesitas ver el clima de tu ciudad? pruéba con mi app del clima.
+Do you need to see the weather in your city? Try my weather app.
 
 ## Table of Contents
 
