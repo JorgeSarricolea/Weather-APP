@@ -51,8 +51,8 @@ cd Weather-APP
 
 Some of the key features of this project include:
 
-- **Responsividad:** The UI works for mobile devices and desktop.
-- **Fetching de datos**: Gets the data needed to display from the API.
+- **Responsiveness:** The UI works for mobile devices and desktop.
+- **Data fetching**: Gets the data needed to display from the API.
 - **Keypress:** It works by pressing the search button or the "enter" key.
 
 ## Contribution
