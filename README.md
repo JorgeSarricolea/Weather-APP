@@ -25,8 +25,7 @@ To get started with "Weather-APP", follow these simple steps:
 > Unlike the project with MealDB, where an API key was not necessary, for this project, it is necessary to generate an API key. I recommend that you register on [OpenWeatherMap](https://openweathermap.org/api) and generate your key, so you only need to change the variables in case you want to run it locally. The variable is called "API_KEY" and you only need to declare that variable and assign it your API Key.
 
 > Example:
-
-**let API_KEY = "your_api_key"**
+> **let API_KEY = "your_api_key"**
 
 ```
 xhr.open("GET", url + userInp + "&units=metric&appid=" + API_KEY, true);
